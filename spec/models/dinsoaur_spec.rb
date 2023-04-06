@@ -42,4 +42,40 @@ RSpec.describe Dinosaur, :type => :model do
       expect(dino).to be_valid
     end
   end
+
+  describe "#herbivore?" do
+    it "returns true when species in herbivore list" do
+      dino = Dinosaur.new(
+        name: "Rex",
+        species: "Brachiosaurus"
+      )
+      expect(dino.herbivore?).to be_truthy
+    end
+
+    it "returns false when species NOT in herbivore list" do
+      dino = Dinosaur.new(
+        name: "Rex",
+        species: "Tyrannosaurus"
+      )
+      expect(dino.herbivore?).to be_falsey
+    end
+  end
+
+  describe "#carnivore?" do
+    it "returns true when species in carnivore list" do
+      dino = Dinosaur.new(
+        name: "Rex",
+        species: "Tyrannosaurus"
+      )
+      expect(dino.carnivore?).to be_truthy
+    end
+
+    it "returns false when species NOT in carnivore list" do
+      dino = Dinosaur.new(
+        name: "Rex",
+        species: "Brachiosaurus"
+      )
+      expect(dino.carnivore?).to be_falsey
+    end
+  end
 end

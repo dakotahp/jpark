@@ -13,7 +13,17 @@ class Dinosaur < ApplicationRecord
     "Triceratops"
   ]
 
+  ALL_SPECIES = CARNIVORES + HERBIVORES
+
   validates :name, presence: true
-  validates :species, inclusion: { in: (CARNIVORES+HERBIVORES),
+  validates :species, inclusion: { in: ALL_SPECIES,
     message: "%{value} is not a valid species" }
+
+  def carnivore?
+    CARNIVORES.include?(species)
+  end
+
+  def herbivore?
+    HERBIVORES.include?(species)
+  end
 end
