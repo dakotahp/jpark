@@ -17,8 +17,28 @@ RSpec.describe "Dinosaurs", type: :request do
   end
 
   describe "CREATE /dinosoaurs.json" do
-    it "returns dinosaur created when valid"
+    it "returns dinosaur created when valid" do
+      post '/dinosaurs.json', params: {
+        dinosaur: {
+          name: "Rex",
+          species: "Tyrannosaurus"
+        }
+      }
 
-    it "returns error message when params invalid"
+      expect(response.status).to eq(200)
+    end
+
+    it "returns error message when params invalid" do
+      post '/dinosaurs.json', params: {
+        dinosaur: {
+          name: "Rex"
+        }
+      }
+
+      json_response = JSON.parse(response.body)
+      error_response = json_response.dig("errors")
+      expect(error_response).to be_present
+      expect(response.status).to eq(403)
+    end
   end
 end

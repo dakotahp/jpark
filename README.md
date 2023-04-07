@@ -6,11 +6,11 @@ My remarks here…
 
 ### The Problem
 
-    It's 1993 and you're the lead software developer for the new Jurassic Park! Park operations needs a system to keep track of the different cages around the park and the different dinosaurs in each one. You'll need to develop a JSON formatted RESTful API to allow the builders to create new cages. It will also allow doctors and scientists the ability to edit/retrieve the statuses of dinosaurs and cages.
+It's 1993 and you're the lead software developer for the new Jurassic Park! Park operations needs a system to keep track of the different cages around the park and the different dinosaurs in each one. You'll need to develop a JSON formatted RESTful API to allow the builders to create new cages. It will also allow doctors and scientists the ability to edit/retrieve the statuses of dinosaurs and cages.
 
 ### Business Requirements
 
-    Please attempt to implement the following business requirements:
+Please attempt to implement the following business requirements:
 
         All requests should respond with the correct HTTP status codes and a response, if necessary, representing either the success or error conditions.
         Data should be persisted using some flavor of SQL.

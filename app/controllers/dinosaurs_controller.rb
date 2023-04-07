@@ -3,8 +3,6 @@ class DinosaursController < ApplicationController
     @dino = Dinosaur.new(dinosaur_params)
     if @dino.valid?
       @dino.save
-    else
-      render json: { status: 'invalid parameters' }, status: 400
     end
 
     respond_to do |format|
