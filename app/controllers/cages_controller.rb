@@ -1,4 +1,7 @@
 class CagesController < ApplicationController
+  # To allow easy CURL examples in readme
+  skip_before_action :verify_authenticity_token
+
   def create
     @cage = Cage.new(cage_params)
 
