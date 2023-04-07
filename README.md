@@ -8,8 +8,9 @@ to use when compared to standard rails controller functionality so I went with t
 The JBuilder template functionality works good but over-all I would use something
 more formal and robust in the real world.
 
-I did TDD for all of this.
+I did TDD for all of this so the specs will describe pretty much everything it does.
 
+Other thoughts:
 * There are more complex ways to structure the difference in dinosaur types like single-table inheritance or subclasses. In the interest of time, I am keeping it more on the simple side as those other approaches have constraints that I didn't want to battle at this time.
 * I would DRY up the specs A LOT more. In the interest of time I left that for a "future refactor" as well as for readability on your part.
 * I didn't bother with spec factories, either. For simpicity and speed. Again, that would really help with DRYing things up and would be what I would normally do.
@@ -23,7 +24,7 @@ I did TDD for all of this.
 * Add dinosaur from a cage
 * Remove dinosaur from a cage
 * Query all dinosaurs
-* Query a dinosaur
+* Query a dinosaur (shows active cage)
 
 ## Usage
 
