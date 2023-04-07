@@ -49,6 +49,16 @@ Add a dinosaur to a cage with:
 curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_id": 1, "dinosaur_id": 2}}' http://localhost:3000/cages/add.json | jq
 ```
 
+Create a new cage, add a dinosaur to it, and then query it:
+
+```
+curl -H "Content-Type: application/json" --request POST --data '{"cage": {"name": "Herbivores"}}' http://localhost:3000/cages.json | jq
+
+curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_id": 2, "dinosaur_id": 8}}' http://localhost:3000/cages/add.json | jq
+
+curl http://localhost:3000/cages/2.json | jq
+```
+
 ## Assignment
 
 ### The Problem
@@ -80,7 +90,7 @@ The following technical requirements must be met:
 ### Bonus Points
 
 * Cages have a maximum capacity for how many dinosaurs it can hold.
-* Cages know how many dinosaurs are contained.
+[x] Cages know how many dinosaurs are contained.
 * Cages have a power status of ACTIVE or DOWN.
 * Cages cannot be powered off if they contain dinosaurs.
 * Dinosaurs cannot be moved into a cage that is powered down.

@@ -9,7 +9,8 @@ class Cage < ApplicationRecord
   end
 
   def add_dinosaur!(dinosaur)
-    if kind == dinosaur.kind
+    # Add first dino without validation or consider first one the canonical type
+    if num_dinosaurs == 0 || kind == dinosaur.kind
       CageDinosaur.create!(
         cage: self,
         dinosaur: dinosaur
