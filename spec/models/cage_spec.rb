@@ -49,4 +49,31 @@ RSpec.describe Cage, :type => :model do
       expect(cage.add_dinosaur!(dino2)).to be_falsey
     end
   end
+
+  describe "#remove_dinosaur!" do
+    it "should remove dinosaur from cage" do
+      cage = Cage.create!(
+        name: "Carnivores"
+      )
+
+      dino1 = Dinosaur.create!(
+        name: "Rex",
+        species: "Tyrannosaurus"
+      )
+
+      dino2 = Dinosaur.create!(
+        name: "Velo",
+        species: "Velociraptor"
+      )
+
+      cage.add_dinosaur!(dino1)
+      cage.add_dinosaur!(dino2)
+
+      expect(cage.dinosaurs.reload.count).to eq(2)
+
+      cage.remove_dinosaur!(dino2)
+
+      expect(cage.dinosaurs.reload.count).to eq(1)
+    end
+  end
 end

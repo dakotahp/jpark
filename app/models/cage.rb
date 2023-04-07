@@ -17,6 +17,13 @@ class Cage < ApplicationRecord
     end
   end
 
+  def remove_dinosaur!(dinosaur)
+    CageDinosaur.find_by(
+        cage: self,
+        dinosaur: dinosaur
+    ).destroy
+  end
+
   private
 
   # Kinda funky. There could be a more codified way of doing this.
