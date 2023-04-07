@@ -1,2 +1,2 @@
-json.data @cage_dinosaur
-json.errors @error
+json.data @cage
+json.errors @cage.errors

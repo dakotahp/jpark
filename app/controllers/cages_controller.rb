@@ -14,19 +14,15 @@ class CagesController < ApplicationController
 
   # Adds a dinosaur by primary key
   def add
-    @status = :created
-    cage = Cage.find_by(id: cage_params[:cage_id])
+    @cage = Cage.find_by(id: cage_params[:cage_id])
     dinosaur = Dinosaur.find_by(id: cage_params[:dinosaur_id])
-    @error = nil
-
-    if !cage.present? && !dinosaur.present?
-      @error = "resources not found"
-    end
-
-    @cage_dinosaur = cage.add_dinosaur!(dinosaur)
 
     respond_to do |format|
-      format.json
+      if @cage.add_dinosaur!(dinosaur)
+        format.json
+      else
+        format.json { render status: :unprocessable_entity }
+      end
     end
   end
 
@@ -41,6 +37,6 @@ class CagesController < ApplicationController
   private
 
   def cage_params
-    params.require(:cage).permit(:name)
+    params.require(:cage).permit(:cage_id, :dinosaur_id, :name)
   end
 end

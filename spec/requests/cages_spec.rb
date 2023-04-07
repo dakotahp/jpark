@@ -59,7 +59,8 @@ RSpec.describe "Cages", type: :request do
       }
 
       json_response = JSON.parse(response.body)
-      expect(response.status).to eq(400)
+      expect(response.status).to eq(422)
+      expect(json_response.dig("errors")).to be_present
     end
   end
 end

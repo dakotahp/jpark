@@ -11,6 +11,8 @@ class Cage < ApplicationRecord
         dinosaur: dinosaur
       )
     else
+      # I would normally iterate on this. Not the best pattern.
+      self.errors.add(:base, "unable to add dinosaur")
       false
     end
   end
