@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_181139) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "species"
-    t.integer "max_capacity", default: 3
+    t.integer "max_capacity", default: 4
   end
 
   create_table "dinosaurs", force: :cascade do |t|

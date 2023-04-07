@@ -13,7 +13,7 @@ Other thoughts:
 * I would DRY up the specs A LOT more. In the interest of time I left that for a "future refactor" as well as for readability on your part.
 * I didn't bother with spec factories, either. For simpicity and speed. Again, that would really help with DRYing things up and would be what I would normally do.
 * Ideally all other edge cases in the APIs would be handled like any relevant records not being found. The limitations of rails controllers would push me to use something third party API library that would assist with that. Rails controller response code functionality gets messy, in my experience.
-* The URLs and routing would ideally be a little more restful: DELETE /cages/1/dinosaur/1 etc. Nesting resources adds a bit more scope and I didn't want to hack the URLs at the routing layer to fake it.
+* The URLs and routing would ideally be a little more RESTful: DELETE /cages/1/dinosaur/1 etc. Nesting resources adds a bit more scope and I didn't want to hack the URLs at the routing layer to fake it.
 
 ## Features
 
@@ -24,6 +24,7 @@ Other thoughts:
 * Query all dinosaurs
 * Query a dinosaur (shows active cage)
 * Repo is somewhat linted with `rubocop`. Fixed some glaring things but didn't go as far as fight a style guide.
+* I didn't go so far as to add power status because I have a few refactors in mind if I did that: adding a small state machine to Cage to help validate status changes and possibly moving management of cages into a third-party class to manage rather than the Cage model itself. That would allow to cage model to have to be a little less concerned over things that could be considered beyond the simple resource.
 
 ## Usage
 
@@ -47,18 +48,14 @@ curl http://localhost:3000/dinosaurs/1.json | jq
 curl http://localhost:3000/dinosaurs/100.json | jq
 ```
 
-See the contents of all cages with and then add species filtering:
+See the contents of all cages, a specific species, or a specific cage, respectively:
 
 ```
 curl http://localhost:3000/cages.json | jq
 
 curl http://localhost:3000/cages.json\?species\=carnivore | jq
 curl http://localhost:3000/cages.json\?species\=herbivore | jq
-```
 
-Or a specific cage with:
-
-```
 curl http://localhost:3000/cages/1.json | jq
 ```
 
@@ -86,6 +83,8 @@ curl -H "Content-Type: application/json" --request DELETE --data '{"cage": {"cag
 curl http://localhost:3000/cages/3.json | jq
 ```
 
+All specs should be passing for verification with `rspec`.
+
 ## Assignment
 
 ### The Problem
@@ -110,9 +109,9 @@ Please attempt to implement the following business requirements:
 
 The following technical requirements must be met:
 
-* This project should be done in Ruby on Rails 6 or newer.
-* This should be done using version control, preferably git.
-* The project should include a README that addresses anything you may not have completed. It should also address what additional changes you might need to make if the application were intended to run in a concurrent environment. Any other comments or thoughts about the project are also welcome.
+* ~~This project should be done in Ruby on Rails 6 or newer.~~
+* ~~This should be done using version control, preferably git.~~
+* ~~The project should include a README that addresses anything you may not have completed. It should also address what additional changes you might need to make if the application were intended to run in a concurrent environment. Any other comments or thoughts about the project are also welcome.~~
 
 ### Bonus Points
 
