@@ -27,6 +27,7 @@ Other thoughts:
 * Repo is somewhat linted with `rubocop`. Shouldn't be any messy stuff like indentation issues or weird characters but didn't go as far as fighting a style guide.
 * I didn't go so far as to add power status because I have a few refactors in mind if I did that: adding a small state machine to Cage to help validate status changes and possibly moving management of cages into a third-party class to manage rather than the Cage model itself. That would allow to cage model to have to be a little less concerned over things that could be considered beyond the simple resource.
 * Most endpoints show counts of resources for helpfulness. Should satisfy the "Cages know how many dinosaurs are contained" requirement as well as for similar cases.
+* Handling of error messages is kind of ad-hoc depending on the situation and resource. Given more functionality and refactor opportunity, I'd dig into establishing consistency there as much as possible. A third-party API library would probably aid in that significantly, too.
 
 ## Usage
 
