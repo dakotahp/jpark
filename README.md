@@ -31,7 +31,7 @@ Other thoughts:
 
 ## Usage
 
-An easy way to try out the API is to use the terminal. It looks better if you install `jq` with `brew install jq`.
+An easy way to try out the API is to use the terminal. It looks better if you install `jq` with `brew install jq`. CURL syntax might be zshell specific with the backslashes. Adjust accordingly if it throws syntax errors in your terminal.
 
 ```
 rails db:migrate db:seed
