@@ -5,3 +5,30 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# Seed every kind of dinosaur
+Dinosaur.destroy_all
+Dinosaur::ALL_SPECIES.each_with_index do |species, index|
+  Dinosaur.create!(
+    name: "Dino #{index}",
+    species: species
+  )
+end
+
+# Create a cage with some carnivores
+Cage.destroy_all
+cage = Cage.create!(
+  name: "Carnivores"
+)
+
+# add some carnivores to it
+CageDinosaur.destroy_all
+CageDinosaur.create!(
+  cage: cage,
+  dinosaur: Dinosaur.carnivores.first
+)
+
+CageDinosaur.create!(
+  cage: cage,
+  dinosaur: Dinosaur.carnivores.last
+)
