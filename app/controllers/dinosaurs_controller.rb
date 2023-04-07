@@ -25,7 +25,17 @@ class DinosaursController < ApplicationController
   end
 
   def index
-    @dinos = Dinosaur.all
+    # Better ways to do this, for sure. But, I was hoping to make it
+    # smart and avoid users having to specify species name "Tyrannosaurus"
+    # AND classification.
+    if params[:species].present? && species_params[:species] == "carnivore"
+      @dinos = Dinosaur.carnivores
+    elsif params[:species].present? && species_params[:species] == "herbivore"
+      @dinos = Dinosaur.herbivores
+    else
+      @dinos = Dinosaur.all
+    end
+
     respond_to do |format|
       format.json
     end
@@ -35,5 +45,9 @@ class DinosaursController < ApplicationController
 
   def dinosaur_params
     params.require(:dinosaur).permit(:name, :species)
+  end
+
+  def species_params
+    params.permit(:species)
   end
 end

@@ -20,7 +20,7 @@ Other thoughts:
 ## Features
 
 * Query cages (with species filter)
-* Query one cage
+* Query one cage (showing dinosaurs)
 * Add dinosaur from a cage
 * Remove dinosaur from a cage
 * Query all dinosaurs
@@ -36,10 +36,13 @@ rails db:migrate db:seed
 rails s
 ```
 
-That will seed some data for the following examples. This will return all dinosaurs, a specific dinosaur, and a not found response, respectively:
+That will seed some data for the following examples. This will return all dinosaurs, species filtered dinosaurs, a specific dinosaur, and a not found response, respectively:
 
 ```
 curl http://localhost:3000/dinosaurs.json | jq
+
+curl http://localhost:3000/dinosaurs.json?species\=carnivore | jq
+curl http://localhost:3000/dinosaurs.json?species\=herbivore | jq
 
 curl http://localhost:3000/dinosaurs/1.json | jq
 
@@ -116,13 +119,13 @@ The following technical requirements must be met:
 ### Bonus Points
 
 * Cages have a maximum capacity for how many dinosaurs it can hold.
-* Cages know how many dinosaurs are contained.
+* ~~Cages know how many dinosaurs are contained.~~
 * Cages have a power status of ACTIVE or DOWN.
 * Cages cannot be powered off if they contain dinosaurs.
 * Dinosaurs cannot be moved into a cage that is powered down.
-* Must be able to query a listing of dinosaurs in a specific cage.
-* When querying dinosaurs or cages they should be filterable on their attributes (Cages on their power status and dinosaurs on species).
-* Automated tests that ensure the business logic implemented is correct.
+* ~~Must be able to query a listing of dinosaurs in a specific cage.~~
+* When querying dinosaurs or cages they should be filterable on their attributes (Cages on their power status and ~~dinosaurs on species~~).
+* ~~Automated tests that ensure the business logic implemented is correct.~~
 
 ### Submission Requirements
 

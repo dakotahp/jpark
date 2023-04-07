@@ -7,4 +7,6 @@ json.data do
   end
 end
 
+json.dino_count @dinos.count
+
 json.errors ""

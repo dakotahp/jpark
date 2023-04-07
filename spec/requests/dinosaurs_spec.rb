@@ -14,6 +14,23 @@ RSpec.describe "Dinosaurs", type: :request do
       expect(dino_response.dig("species")).to eq(dino.species)
       expect(response.status).to eq(200)
     end
+
+    it "returns filtered list of dinosaurs when species specified" do
+      dino = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
+      Dinosaur.create!(name: "Brach", species: "Brachiosaurus")
+
+      get "/dinosaurs.json?species=carnivore"
+
+      json_response = JSON.parse(response.body)
+      dinos_response = json_response.dig("data")
+
+      expect(response.status).to eq(200)
+
+      expect(dinos_response[0].dig("id")).to eq(dino.id)
+      expect(dinos_response[0].dig("name")).to eq(dino.name)
+      expect(dinos_response[0].dig("species")).to eq(dino.species)
+      expect(dinos_response.count).to eq(1)
+    end
   end
 
   describe "GET /dinosaurs/1.json" do
