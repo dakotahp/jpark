@@ -2,11 +2,11 @@
 
 My approach was to use jbuilder since it is built into rails and a quick way to
 bootstrap an API. While I haven't used it much for formal APIs, it is very easy
-to use when compared to standard rails controller functionality so I went with that.
-The JBuilder template functionality works good but over-all I would use something
-more formal and robust in the real world.
+to use for simple examples. In the long run I would use something
+more formal and robust in the real world. I've used [Grape](https://github.com/ruby-grape/grape#what-is-grape) and another one which I'm forgetting but they're far more complex to setup and use.
 
 I did TDD for all of this so the specs will describe pretty much everything it does.
+Uses sqlite3 for simplicity for you to run as-is as described below.
 
 Other thoughts:
 * There are more complex ways to structure the difference in dinosaur types like single-table inheritance or subclasses. In the interest of time, I am keeping it more on the simple side as those other approaches have constraints that I didn't want to battle at this time.
@@ -14,6 +14,7 @@ Other thoughts:
 * I didn't bother with spec factories, either. For simpicity and speed. Again, that would really help with DRYing things up and would be what I would normally do.
 * Ideally all other edge cases in the APIs would be handled like any relevant records not being found. The limitations of rails controllers would push me to use something third party API library that would assist with that. Rails controller response code functionality gets messy, in my experience.
 * The URLs and routing would ideally be a little more RESTful: DELETE /cages/1/dinosaur/1 etc. Nesting resources adds a bit more scope and I didn't want to hack the URLs at the routing layer to fake it.
+* More specific comments throughout in the code for nitty gritty thoughts.
 
 ## Features
 
@@ -23,8 +24,9 @@ Other thoughts:
 * Remove dinosaur from a cage
 * Query all dinosaurs
 * Query a dinosaur (shows active cage)
-* Repo is somewhat linted with `rubocop`. Fixed some glaring things but didn't go as far as fight a style guide.
+* Repo is somewhat linted with `rubocop`. Shouldn't be any messy stuff like indentation issues or weird characters but didn't go as far as fighting a style guide.
 * I didn't go so far as to add power status because I have a few refactors in mind if I did that: adding a small state machine to Cage to help validate status changes and possibly moving management of cages into a third-party class to manage rather than the Cage model itself. That would allow to cage model to have to be a little less concerned over things that could be considered beyond the simple resource.
+* Most endpoints show counts of resources for helpfulness. Should satisfy the "Cages know how many dinosaurs are contained" requirement as well as for similar cases.
 
 ## Usage
 
@@ -35,7 +37,9 @@ rails db:migrate db:seed
 rails s
 ```
 
-That will seed some data for the following examples. This will return all dinosaurs, species filtered dinosaurs, a specific dinosaur, and a not found response, respectively:
+The database should now be seeded for the following examples.
+
+The following will return all dinosaurs, species filtered dinosaurs, a specific dinosaur, and a not found response, respectively:
 
 ```
 curl http://localhost:3000/dinosaurs.json | jq
@@ -48,7 +52,7 @@ curl http://localhost:3000/dinosaurs/1.json | jq
 curl http://localhost:3000/dinosaurs/100.json | jq
 ```
 
-See the contents of all cages, a specific species, or a specific cage, respectively:
+See the contents of all cages, filter by specific species, or see a specific cage, respectively:
 
 ```
 curl http://localhost:3000/cages.json | jq
@@ -59,7 +63,7 @@ curl http://localhost:3000/cages.json\?species\=herbivore | jq
 curl http://localhost:3000/cages/1.json | jq
 ```
 
-Add a dinosaur to a cage with:
+Add a dinosaur to an existing cage with:
 
 ```
 curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_id": 1, "dinosaur_id": 3}}' http://localhost:3000/cages/add.json | jq

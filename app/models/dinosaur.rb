@@ -28,11 +28,14 @@ class Dinosaur < ApplicationRecord
   scope :carnivores, -> { where(species: CARNIVORES) }
   scope :herbivores, -> { where(species: HERBIVORES) }
 
+  # Would be modified to add scoping to whatever cage is
+  # currently active per comment for `has_many` associations.
   def active_cage
     cages.first
   end
 
-  # Same thoughts as the similar method in Cage.
+  # Probably alternative ways to do this. I always err in favor
+  # of dynamic functionality until added parameter complexity is needed.
   def kind
     if carnivore?
       :carnivore
