@@ -62,15 +62,15 @@ curl http://localhost:3000/cages/1.json | jq
 Add a dinosaur to a cage with:
 
 ```
-curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_id": 1, "dinosaur_id": 2}}' http://localhost:3000/cages/add.json | jq
+curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_id": 1, "dinosaur_id": 3}}' http://localhost:3000/cages/add.json | jq
 ```
 
 Create a new cage, add a dinosaur to it, and then query it:
 
 ```
-curl -H "Content-Type: application/json" --request POST --data '{"cage": {"name": "Other Herbivores", "species": "carnivore"}}' http://localhost:3000/cages.json | jq
+curl -H "Content-Type: application/json" --request POST --data '{"cage": {"name": "Other Herbivores", "species": "herbivore"}}' http://localhost:3000/cages.json | jq
 
-curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_id": 3, "dinosaur_id": 8}}' http://localhost:3000/cages/add.json | jq
+curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_id": 3, "dinosaur_id": 7}}' http://localhost:3000/cages/add.json | jq
 
 curl http://localhost:3000/cages/3.json | jq
 ```
@@ -78,7 +78,7 @@ curl http://localhost:3000/cages/3.json | jq
 Finally, you can remove the dinosaur from the cage and check it again:
 
 ```
-curl -H "Content-Type: application/json" --request DELETE --data '{"cage": {"cage_id": 3, "dinosaur_id": 8}}' http://localhost:3000/cages/remove.json | jq
+curl -H "Content-Type: application/json" --request DELETE --data '{"cage": {"cage_id": 3, "dinosaur_id": 7}}' http://localhost:3000/cages/remove.json | jq
 
 curl http://localhost:3000/cages/3.json | jq
 ```
