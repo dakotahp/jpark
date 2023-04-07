@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :dinosaurs, only: [:create, :index]
+  resources :dinosaurs, only: [:create, :show, :index]
 
   resources :cages, only: [:create, :show, :index]
   post "/cages/add", to: "cages#add"

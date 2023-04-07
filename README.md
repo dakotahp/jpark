@@ -16,6 +16,15 @@ I did TDD for all of this.
 * Ideally all other edge cases in the APIs would be handled like any relevant records not being found. The limitations of rails controllers would push me to use something third party that would assist with that. Rails controller response code functionality gets messy, in my experience.
 * The URLs and routing would ideally be a little more restful: DELETE /cages/1/dinosaur/1 etc. Nesting resources adds a bit more scope and I didn't want to hack the URLs at the routing layer to fake it.
 
+## Features
+
+* Query cages (with species filter)
+* Query one cage
+* Add dinosaur from a cage
+* Remove dinosaur from a cage
+* Query all dinosaurs
+* Query a dinosaur
+
 ## Usage
 
 An easy way to try out the API is to use the terminal. It looks better if you install `jq` with `brew install jq`.
@@ -25,10 +34,14 @@ rails db:migrate db:seed
 rails s
 ```
 
-That will seed some data for the following examples. This will return all dinosaurs:
+That will seed some data for the following examples. This will return all dinosaurs, a specific dinosaur, and a not found response, respectively:
 
 ```
 curl http://localhost:3000/dinosaurs.json | jq
+
+curl http://localhost:3000/dinosaurs/1.json | jq
+
+curl http://localhost:3000/dinosaurs/100.json | jq
 ```
 
 See the contents of all cages with and then add species filtering:

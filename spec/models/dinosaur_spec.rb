@@ -84,4 +84,20 @@ RSpec.describe Dinosaur, :type => :model do
       expect(dino.carnivore?).to be_falsey
     end
   end
+
+  describe "#active_cage" do
+    it "returns cage that dinosaur is in" do
+      dino = Dinosaur.new(
+        name: "Rex",
+        species: "Tyrannosaurus"
+      )
+      cage = Cage.create!(
+        name: "Carnivores",
+        species: Cage::CARNIVORE
+      )
+      cage.add_dinosaur!(dino)
+
+      expect(dino.active_cage.id).to eq(cage.id)
+    end
+  end
 end

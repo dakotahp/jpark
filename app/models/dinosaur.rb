@@ -28,6 +28,10 @@ class Dinosaur < ApplicationRecord
   scope :carnivores, -> { where(species: CARNIVORES) }
   scope :herbivores, -> { where(species: HERBIVORES) }
 
+  def active_cage
+    cages.first
+  end
+
   # Same thoughts as the similar method in Cage.
   def kind
     if carnivore?
