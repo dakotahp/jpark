@@ -1,6 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Dinosaur, :type => :model do
+  context "associations" do
+    it { should have_many(:cage_dinosaurs) }
+    it { should have_many(:cages) }
+    it { should validate_presence_of(:name) }
+  end
+
   it "is valid with valid attributes" do
     dino = Dinosaur.new(
       name: "Rex",

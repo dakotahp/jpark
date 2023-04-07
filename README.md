@@ -59,6 +59,14 @@ curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_
 curl http://localhost:3000/cages/2.json | jq
 ```
 
+Finally, you can remove the dinosaur from the cage and check it again:
+
+```
+curl -H "Content-Type: application/json" --request DELETE --data '{"cage": {"cage_id": 2, "dinosaur_id": 8}}' http://localhost:3000/cages/remove.json | jq
+
+curl http://localhost:3000/cages/2.json | jq
+```
+
 ## Assignment
 
 ### The Problem
