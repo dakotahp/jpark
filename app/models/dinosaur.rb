@@ -15,9 +15,9 @@ class Dinosaur < ApplicationRecord
 
   ALL_SPECIES = CARNIVORES + HERBIVORES
 
-  # Obviously, a dinosaur can ideally have only one cage.
-  # Using the join table method made sense to me at the moment
-  # and it could be validated to only allow one.
+  # A dinosaur can have only one active cage.
+  # This allows for future tracking of what cages a dinosaur was ever in
+  # if a new attribute was added like `active`.
   has_many :cage_dinosaurs
   has_many :cages, through: :cage_dinosaurs
 

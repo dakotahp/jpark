@@ -1,6 +1,48 @@
 require 'rails_helper'
 
 RSpec.describe "Cages", type: :request do
+  describe "GET /cages.json" do
+    it "returns all cages when no species specified" do
+      cage1 = Cage.create!(
+        name: "Carnivores",
+        species: Cage::CARNIVORE
+      )
+      cage2 = Cage.create!(
+        name: "Herbivores",
+        species: Cage::HERBIVORE
+      )
+
+      get '/cages.json'
+
+      json_response = JSON.parse(response.body)
+      cages_response = json_response.dig("data")
+
+      expect(response.status).to eq(200)
+      expect(cages_response[0].dig("id")).to eq(cage1.id)
+      expect(cages_response[1].dig("id")).to eq(cage2.id)
+    end
+
+    it "returns filtered list of cages when species specified" do
+      cage = Cage.create!(
+        name: "Carnivores",
+        species: Cage::CARNIVORE
+      )
+      Cage.create!(
+        name: "Herbivores",
+        species: Cage::HERBIVORE
+      )
+
+      get '/cages.json?species=carnivore'
+
+      json_response = JSON.parse(response.body)
+      cages_response = json_response.dig("data")
+
+      expect(response.status).to eq(200)
+      expect(cages_response[0].dig("id")).to eq(cage.id)
+      expect(cages_response.count).to eq(1)
+    end
+  end
+
   describe "CREATE /cages.json" do
     it "returns cage created when valid" do
       post '/cages.json', params: {

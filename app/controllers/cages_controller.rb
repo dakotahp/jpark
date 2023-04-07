@@ -56,9 +56,13 @@ class CagesController < ApplicationController
     end
   end
 
-  # Not required but helpful for debugging and implementation
   def index
-    @cages = Cage.all
+    if params[:species].present?
+      @cages = Cage.where(species: species_params[:species])
+    else
+      @cages = Cage.all
+    end
+
     respond_to do |format|
       format.json
     end
@@ -68,5 +72,9 @@ class CagesController < ApplicationController
 
   def cage_params
     params.require(:cage).permit(:cage_id, :dinosaur_id, :name, :species)
+  end
+
+  def species_params
+    params.permit(:species)
   end
 end

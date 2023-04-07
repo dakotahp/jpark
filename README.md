@@ -31,10 +31,13 @@ That will seed some data for the following examples. This will return all dinosa
 curl http://localhost:3000/dinosaurs.json | jq
 ```
 
-See the contents of all cages with:
+See the contents of all cages with and then add species filtering:
 
 ```
 curl http://localhost:3000/cages.json | jq
+
+curl http://localhost:3000/cages.json\?species\=carnivore | jq
+curl http://localhost:3000/cages.json\?species\=herbivore | jq
 ```
 
 Or a specific cage with:
@@ -52,19 +55,19 @@ curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_
 Create a new cage, add a dinosaur to it, and then query it:
 
 ```
-curl -H "Content-Type: application/json" --request POST --data '{"cage": {"name": "Herbivores", "species": "carnivore"}}' http://localhost:3000/cages.json | jq
+curl -H "Content-Type: application/json" --request POST --data '{"cage": {"name": "Other Herbivores", "species": "carnivore"}}' http://localhost:3000/cages.json | jq
 
-curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_id": 2, "dinosaur_id": 8}}' http://localhost:3000/cages/add.json | jq
+curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_id": 3, "dinosaur_id": 8}}' http://localhost:3000/cages/add.json | jq
 
-curl http://localhost:3000/cages/2.json | jq
+curl http://localhost:3000/cages/3.json | jq
 ```
 
 Finally, you can remove the dinosaur from the cage and check it again:
 
 ```
-curl -H "Content-Type: application/json" --request DELETE --data '{"cage": {"cage_id": 2, "dinosaur_id": 8}}' http://localhost:3000/cages/remove.json | jq
+curl -H "Content-Type: application/json" --request DELETE --data '{"cage": {"cage_id": 3, "dinosaur_id": 8}}' http://localhost:3000/cages/remove.json | jq
 
-curl http://localhost:3000/cages/2.json | jq
+curl http://localhost:3000/cages/3.json | jq
 ```
 
 ## Assignment

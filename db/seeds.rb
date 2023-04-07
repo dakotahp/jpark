@@ -17,14 +17,23 @@ end
 
 # Create a cage with some carnivores
 Cage.destroy_all
-cage = Cage.create!(
+cage1 = Cage.create!(
   name: "Carnivores",
   species: Cage::CARNIVORE
 )
 
 # Add some carnivores to it
-CageDinosaur.destroy_all
-cage.add_dinosaur!(Dinosaur.carnivores.first)
-cage.add_dinosaur!(Dinosaur.carnivores.last)
+cage1.add_dinosaur!(Dinosaur.carnivores.first)
+cage1.add_dinosaur!(Dinosaur.carnivores.last)
+
+# Create a cage with some herbivores
+cage2 = Cage.create!(
+  name: "Herbivores",
+  species: Cage::HERBIVORE
+)
+
+# Add some carnivores to it
+cage2.add_dinosaur!(Dinosaur.herbivores.first)
+cage2.add_dinosaur!(Dinosaur.herbivores.last)
 
 p "All done!"
