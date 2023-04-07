@@ -3,12 +3,15 @@ require 'rails_helper'
 RSpec.describe "Dinosaurs", type: :request do
   describe "GET /dinosoaurs.json" do
     it "returns dinosoaurs found" do
-      Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
+      dino = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
 
       get "/dinosaurs.json"
 
-      byebug
-      expect(response.body).to eq('{"status":"online"}')
+      json_response = JSON.parse(response.body)
+      dino_response = json_response.dig("data")[0]
+      expect(dino_response.dig("id")).to eq(dino.id)
+      expect(dino_response.dig("name")).to eq(dino.name)
+      expect(dino_response.dig("species")).to eq(dino.species)
       expect(response.status).to eq(200)
     end
   end
