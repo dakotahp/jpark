@@ -4,6 +4,10 @@ class Cage < ApplicationRecord
 
   validates :name, presence: true
 
+  def num_dinosaurs
+    dinosaurs.count
+  end
+
   def add_dinosaur!(dinosaur)
     if kind == dinosaur.kind
       CageDinosaur.create!(
