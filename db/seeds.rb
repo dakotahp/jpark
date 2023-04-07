@@ -25,3 +25,5 @@ cage = Cage.create!(
 CageDinosaur.destroy_all
 cage.add_dinosaur!(Dinosaur.carnivores.first)
 cage.add_dinosaur!(Dinosaur.carnivores.last)
+
+p "All done!"

@@ -16,7 +16,7 @@ RSpec.describe "Dinosaurs", type: :request do
     end
   end
 
-  describe "CREATE /dinosoaurs.json" do
+  describe "CREATE /dinosaurs.json" do
     it "returns dinosaur created when valid" do
       post '/dinosaurs.json', params: {
         dinosaur: {

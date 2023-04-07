@@ -2,6 +2,8 @@ class Cage < ApplicationRecord
   has_many :cage_dinosaurs
   has_many :dinosaurs, through: :cage_dinosaurs
 
+  validates :name, presence: true
+
   def add_dinosaur!(dinosaur)
     if kind == dinosaur.kind
       CageDinosaur.create!(
@@ -9,7 +11,7 @@ class Cage < ApplicationRecord
         dinosaur: dinosaur
       )
     else
-      raise Exception.new('cannot add different species in the same cage')
+      false
     end
   end
 

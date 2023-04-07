@@ -4,6 +4,8 @@ RSpec.describe Cage, :type => :model do
   context "associations" do
     it { should have_many(:cage_dinosaurs) }
     it { should have_many(:dinosaurs) }
+    it { should have_many(:dinosaurs) }
+    it { should validate_presence_of(:name) }
   end
 
   describe "#add_dinosaur!" do
@@ -24,9 +26,7 @@ RSpec.describe Cage, :type => :model do
 
       cage.add_dinosaur!(dino1)
 
-      expect {
-        cage.add_dinosaur!(dino2)
-      }.not_to raise_exception
+      expect(cage.add_dinosaur!(dino2)).to be_truthy
     end
 
     it "should NOT allow different species to be added" do
@@ -46,9 +46,7 @@ RSpec.describe Cage, :type => :model do
 
       cage.add_dinosaur!(dino1)
 
-      expect {
-        cage.add_dinosaur!(dino2)
-      }.to raise_exception
+      expect(cage.add_dinosaur!(dino2)).to be_falsey
     end
   end
 end
