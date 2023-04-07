@@ -18,7 +18,8 @@ end
 # Create a cage with some carnivores
 Cage.destroy_all
 cage = Cage.create!(
-  name: "Carnivores"
+  name: "Carnivores",
+  species: Cage::CARNIVORE
 )
 
 # Add some carnivores to it

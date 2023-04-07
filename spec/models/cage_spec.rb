@@ -11,7 +11,8 @@ RSpec.describe Cage, :type => :model do
   describe "#add_dinosaur!" do
     it "should allow same species to be added" do
       cage = Cage.create!(
-        name: "Carnivores"
+        name: "Carnivores",
+        species: Cage::CARNIVORE
       )
 
       dino1 = Dinosaur.create!(
@@ -31,7 +32,8 @@ RSpec.describe Cage, :type => :model do
 
     it "should NOT allow different species to be added" do
       cage = Cage.create!(
-        name: "Carnivores"
+        name: "Carnivores",
+        species: Cage::CARNIVORE
       )
 
       dino1 = Dinosaur.create!(
@@ -53,7 +55,8 @@ RSpec.describe Cage, :type => :model do
   describe "#remove_dinosaur!" do
     it "should remove dinosaur from cage" do
       cage = Cage.create!(
-        name: "Carnivores"
+        name: "Carnivores",
+        species: Cage::CARNIVORE
       )
 
       dino1 = Dinosaur.create!(

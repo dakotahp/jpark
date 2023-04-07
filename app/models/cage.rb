@@ -1,8 +1,19 @@
 class Cage < ApplicationRecord
+  # I could use a formal enum in Rails, too
+  CARNIVORE = "carnivore"
+  HERBIVORE = "herbivore"
+
+  SPECIES = [
+    CARNIVORE,
+    HERBIVORE
+  ]
+
   has_many :cage_dinosaurs
   has_many :dinosaurs, through: :cage_dinosaurs
 
   validates :name, presence: true
+  validates :species, inclusion: { in: SPECIES,
+    message: "%{value} is not a valid species" }
 
   def num_dinosaurs
     dinosaurs.count

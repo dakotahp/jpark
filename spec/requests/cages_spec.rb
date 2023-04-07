@@ -5,7 +5,8 @@ RSpec.describe "Cages", type: :request do
     it "returns cage created when valid" do
       post '/cages.json', params: {
         cage: {
-          name: "Carnivores"
+          name: "Carnivores",
+          species: Cage::CARNIVORE
         }
       }
 
@@ -28,7 +29,10 @@ RSpec.describe "Cages", type: :request do
 
   describe "GET /cage/1.json" do
     it "returns cage" do
-      cage = Cage.create!(name: "Carnivores")
+      cage = Cage.create!(
+        name: "Carnivores",
+        species: Cage::CARNIVORE
+      )
       dino = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
       cage.add_dinosaur!(dino)
 
@@ -54,7 +58,10 @@ RSpec.describe "Cages", type: :request do
 
   describe "POST /cages/add.json" do
     it "adds a dinosaur to a cage" do
-      cage = Cage.create!(name: "Carnivores")
+      cage = Cage.create!(
+        name: "Carnivores",
+        species: Cage::CARNIVORE
+      )
       dino = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
 
       post '/cages/add.json', params: {
@@ -69,7 +76,10 @@ RSpec.describe "Cages", type: :request do
     end
 
     it "fails to add a dinosaur of a different species to an existing cage" do
-      cage = Cage.create!(name: "Carnivores")
+      cage = Cage.create!(
+        name: "Carnivores",
+        species: Cage::CARNIVORE
+      )
       dino1 = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
       # add it already rather than test the request twice
       cage.add_dinosaur!(dino1)
@@ -92,7 +102,10 @@ RSpec.describe "Cages", type: :request do
 
   describe "DELETE /cages/remove.json" do
     it "removes a dinosaur from a cage" do
-      cage = Cage.create!(name: "Carnivores")
+      cage = Cage.create!(
+        name: "Carnivores",
+        species: Cage::CARNIVORE
+      )
       dino = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
       cage.add_dinosaur!(dino)
 

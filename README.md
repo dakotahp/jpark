@@ -52,7 +52,7 @@ curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_
 Create a new cage, add a dinosaur to it, and then query it:
 
 ```
-curl -H "Content-Type: application/json" --request POST --data '{"cage": {"name": "Herbivores"}}' http://localhost:3000/cages.json | jq
+curl -H "Content-Type: application/json" --request POST --data '{"cage": {"name": "Herbivores", "species": "carnivore"}}' http://localhost:3000/cages.json | jq
 
 curl -H "Content-Type: application/json" --request POST --data '{"cage": {"cage_id": 2, "dinosaur_id": 8}}' http://localhost:3000/cages/add.json | jq
 

@@ -67,6 +67,6 @@ class CagesController < ApplicationController
   private
 
   def cage_params
-    params.require(:cage).permit(:cage_id, :dinosaur_id, :name)
+    params.require(:cage).permit(:cage_id, :dinosaur_id, :name, :species)
   end
 end
