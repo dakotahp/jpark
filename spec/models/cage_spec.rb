@@ -50,6 +50,28 @@ RSpec.describe Cage, type: :model do
 
       expect(cage.add_dinosaur!(dino2)).to be_falsey
     end
+
+    it "should not allow capacity to be exceeded" do
+      cage = Cage.create!(
+        name: "Carnivores",
+        species: Cage::CARNIVORE,
+        max_capacity: 1
+      )
+
+      dino1 = Dinosaur.create!(
+        name: "Rex",
+        species: "Tyrannosaurus"
+      )
+
+      dino2 = Dinosaur.create!(
+        name: "Brach",
+        species: "Brachiosaurus"
+      )
+
+      cage.add_dinosaur!(dino1)
+
+      expect(cage.add_dinosaur!(dino2)).to be_falsey
+    end
   end
 
   describe "#remove_dinosaur!" do

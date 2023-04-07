@@ -20,14 +20,14 @@ class Cage < ApplicationRecord
   end
 
   def add_dinosaur!(dinosaur)
-    if num_dinosaurs.zero? || species.to_sym == dinosaur.kind
+    if max_capacity != dinosaurs.count && species.to_sym == dinosaur.kind
       CageDinosaur.create!(
         cage: self,
         dinosaur: dinosaur
       )
     else
       # I would normally iterate on this. Not the best pattern.
-      # Failing harder with error would be more ideal but catching
+      # Failing harder with a thrown error would be more ideal but catching
       # it everywhere else adds complexity and scope in the controller
       # where logic can get messy very quickly.
       self.errors.add(:base, "unable to add dinosaur")
