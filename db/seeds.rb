@@ -21,14 +21,7 @@ cage = Cage.create!(
   name: "Carnivores"
 )
 
-# add some carnivores to it
+# Add some carnivores to it
 CageDinosaur.destroy_all
-CageDinosaur.create!(
-  cage: cage,
-  dinosaur: Dinosaur.carnivores.first
-)
-
-CageDinosaur.create!(
-  cage: cage,
-  dinosaur: Dinosaur.carnivores.last
-)
+cage.add_dinosaur!(Dinosaur.carnivores.first)
+cage.add_dinosaur!(Dinosaur.carnivores.last)
