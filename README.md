@@ -25,6 +25,7 @@ Other thoughts:
 * Remove dinosaur from a cage
 * Query all dinosaurs
 * Query a dinosaur (shows active cage)
+* Repo is somewhat linted with `rubocop`. Fixed some glaring things but didn't go as far as fight a style guide.
 
 ## Usage
 
@@ -115,7 +116,7 @@ The following technical requirements must be met:
 ### Bonus Points
 
 * Cages have a maximum capacity for how many dinosaurs it can hold.
-[x] Cages know how many dinosaurs are contained.
+* Cages know how many dinosaurs are contained.
 * Cages have a power status of ACTIVE or DOWN.
 * Cages cannot be powered off if they contain dinosaurs.
 * Dinosaurs cannot be moved into a cage that is powered down.

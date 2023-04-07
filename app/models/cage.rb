@@ -1,7 +1,7 @@
 class Cage < ApplicationRecord
   # I could use a formal enum in Rails, too
-  CARNIVORE = "carnivore"
-  HERBIVORE = "herbivore"
+  CARNIVORE = "carnivore".freeze
+  HERBIVORE = "herbivore".freeze
 
   SPECIES = [
     CARNIVORE,
@@ -20,13 +20,16 @@ class Cage < ApplicationRecord
   end
 
   def add_dinosaur!(dinosaur)
-    if num_dinosaurs == 0 || species.to_sym == dinosaur.kind
+    if num_dinosaurs.zero? || species.to_sym == dinosaur.kind
       CageDinosaur.create!(
         cage: self,
         dinosaur: dinosaur
       )
     else
       # I would normally iterate on this. Not the best pattern.
+      # Failing harder with error would be more ideal but catching
+      # it everywhere else adds complexity and scope in the controller
+      # where logic can get messy very quickly.
       self.errors.add(:base, "unable to add dinosaur")
       false
     end
@@ -34,8 +37,8 @@ class Cage < ApplicationRecord
 
   def remove_dinosaur!(dinosaur)
     CageDinosaur.find_by(
-        cage: self,
-        dinosaur: dinosaur
+      cage: self,
+      dinosaur: dinosaur
     ).destroy
   end
 end

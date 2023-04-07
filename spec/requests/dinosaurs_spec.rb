@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Dinosaurs", type: :request do
   describe "GET /dinosaurs.json" do
@@ -51,7 +51,7 @@ RSpec.describe "Dinosaurs", type: :request do
     end
 
     it "shows error message if dinosaur not found" do
-      dino = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
+      Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
 
       get "/dinosaurs/100.json"
 
@@ -64,7 +64,7 @@ RSpec.describe "Dinosaurs", type: :request do
 
   describe "CREATE /dinosaurs.json" do
     it "returns dinosaur created when valid" do
-      post '/dinosaurs.json', params: {
+      post "/dinosaurs.json", params: {
         dinosaur: {
           name: "Rex",
           species: "Tyrannosaurus"
@@ -75,7 +75,7 @@ RSpec.describe "Dinosaurs", type: :request do
     end
 
     it "returns error message when params invalid" do
-      post '/dinosaurs.json', params: {
+      post "/dinosaurs.json", params: {
         dinosaur: {
           name: "Rex"
         }

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Cages", type: :request do
   describe "GET /cages.json" do
@@ -12,7 +12,7 @@ RSpec.describe "Cages", type: :request do
         species: Cage::HERBIVORE
       )
 
-      get '/cages.json'
+      get "/cages.json"
 
       json_response = JSON.parse(response.body)
       cages_response = json_response.dig("data")
@@ -32,7 +32,7 @@ RSpec.describe "Cages", type: :request do
         species: Cage::HERBIVORE
       )
 
-      get '/cages.json?species=carnivore'
+      get "/cages.json?species=carnivore"
 
       json_response = JSON.parse(response.body)
       cages_response = json_response.dig("data")
@@ -45,7 +45,7 @@ RSpec.describe "Cages", type: :request do
 
   describe "CREATE /cages.json" do
     it "returns cage created when valid" do
-      post '/cages.json', params: {
+      post "/cages.json", params: {
         cage: {
           name: "Carnivores",
           species: Cage::CARNIVORE
@@ -56,7 +56,7 @@ RSpec.describe "Cages", type: :request do
     end
 
     it "returns error message when params invalid" do
-      post '/cages.json', params: {
+      post "/cages.json", params: {
         cage: {
           name: nil
         }
@@ -78,7 +78,7 @@ RSpec.describe "Cages", type: :request do
       dino = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
       cage.add_dinosaur!(dino)
 
-      get '/cages/1.json'
+      get "/cages/1.json"
 
       json_response = JSON.parse(response.body)
       cage_response = json_response.dig("data").dig("cage")
@@ -90,7 +90,7 @@ RSpec.describe "Cages", type: :request do
     end
 
     it "returns error message when cage not found" do
-      get '/cages/100.json'
+      get "/cages/100.json"
 
       json_response = JSON.parse(response.body)
       expect(response.status).to eq(404)
@@ -106,14 +106,13 @@ RSpec.describe "Cages", type: :request do
       )
       dino = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
 
-      post '/cages/add.json', params: {
+      post "/cages/add.json", params: {
         cage: {
           cage_id: cage.id,
           dinosaur_id: dino.id
         }
       }
 
-      json_response = JSON.parse(response.body)
       expect(response.status).to eq(200)
     end
 
@@ -129,7 +128,7 @@ RSpec.describe "Cages", type: :request do
       # the one that shouldn't be possible to add
       dino2 = Dinosaur.create!(name: "Brach", species: "Brachiosaurus")
 
-      post '/cages/add.json', params: {
+      post "/cages/add.json", params: {
         cage: {
           cage_id: cage.id,
           dinosaur_id: dino2.id
@@ -151,14 +150,13 @@ RSpec.describe "Cages", type: :request do
       dino = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
       cage.add_dinosaur!(dino)
 
-      delete '/cages/remove.json', params: {
+      delete "/cages/remove.json", params: {
         cage: {
           cage_id: cage.id,
           dinosaur_id: dino.id
         }
       }
 
-      # json_response = JSON.parse(response.body)
       expect(response.status).to eq(200)
       expect(cage.dinosaurs.reload.count).to eq(0)
     end
