@@ -1,7 +1,5 @@
 # README
 
-My remarks here…
-
 My approach was to use jbuilder since it is built into rails and a quick way to
 bootstrap an API. While I haven't used it much for formal APIs, it is very easy
 to use when compared to standard rails controller functionality so I went with that.
@@ -14,7 +12,7 @@ Other thoughts:
 * There are more complex ways to structure the difference in dinosaur types like single-table inheritance or subclasses. In the interest of time, I am keeping it more on the simple side as those other approaches have constraints that I didn't want to battle at this time.
 * I would DRY up the specs A LOT more. In the interest of time I left that for a "future refactor" as well as for readability on your part.
 * I didn't bother with spec factories, either. For simpicity and speed. Again, that would really help with DRYing things up and would be what I would normally do.
-* Ideally all other edge cases in the APIs would be handled like any relevant records not being found. The limitations of rails controllers would push me to use something third party that would assist with that. Rails controller response code functionality gets messy, in my experience.
+* Ideally all other edge cases in the APIs would be handled like any relevant records not being found. The limitations of rails controllers would push me to use something third party API library that would assist with that. Rails controller response code functionality gets messy, in my experience.
 * The URLs and routing would ideally be a little more restful: DELETE /cages/1/dinosaur/1 etc. Nesting resources adds a bit more scope and I didn't want to hack the URLs at the routing layer to fake it.
 
 ## Features
@@ -118,7 +116,7 @@ The following technical requirements must be met:
 
 ### Bonus Points
 
-* Cages have a maximum capacity for how many dinosaurs it can hold.
+* ~~Cages have a maximum capacity for how many dinosaurs it can hold.~~
 * ~~Cages know how many dinosaurs are contained.~~
 * Cages have a power status of ACTIVE or DOWN.
 * Cages cannot be powered off if they contain dinosaurs.
@@ -126,7 +124,3 @@ The following technical requirements must be met:
 * ~~Must be able to query a listing of dinosaurs in a specific cage.~~
 * When querying dinosaurs or cages they should be filterable on their attributes (Cages on their power status and ~~dinosaurs on species~~).
 * ~~Automated tests that ensure the business logic implemented is correct.~~
-
-### Submission Requirements
-
-A link to a hosted git repository or tarball of the git repository of the finished project. Please email the link or tarball to sethen@prizepicks.com
