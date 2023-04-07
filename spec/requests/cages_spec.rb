@@ -89,4 +89,23 @@ RSpec.describe "Cages", type: :request do
       expect(json_response.dig("errors")).to be_present
     end
   end
+
+  describe "DELETE /cages/remove.json" do
+    it "removes a dinosaur from a cage" do
+      cage = Cage.create!(name: "Carnivores")
+      dino = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
+      cage.add_dinosaur!(dino)
+
+      delete '/cages/remove.json', params: {
+        cage: {
+          cage_id: cage.id,
+          dinosaur_id: dino.id
+        }
+      }
+
+      # json_response = JSON.parse(response.body)
+      expect(response.status).to eq(200)
+      expect(cage.dinosaurs.reload.count).to eq(0)
+    end
+  end
 end

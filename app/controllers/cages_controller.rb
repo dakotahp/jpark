@@ -39,6 +39,20 @@ class CagesController < ApplicationController
     end
   end
 
+  # Removes a dinosaur by primary key
+  def remove
+    @cage = Cage.find_by(id: cage_params[:cage_id])
+    dinosaur = Dinosaur.find_by(id: cage_params[:dinosaur_id])
+
+    respond_to do |format|
+      if @cage.remove_dinosaur!(dinosaur)
+        format.json
+      else
+        format.json { render status: :unprocessable_entity }
+      end
+    end
+  end
+
   # Not required but helpful for debugging and implementation
   def index
     @cages = Cage.all
