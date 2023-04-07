@@ -11,6 +11,19 @@ class CagesController < ApplicationController
     end
   end
 
+  def show
+    @cage = Cage.find_by(id: params[:id])
+    @errors = nil
+
+    respond_to do |format|
+      if @cage.present?
+        format.json
+      else
+        @errors = "cage not found"
+        format.json { render status: :not_found }
+      end
+    end
+  end
 
   # Adds a dinosaur by primary key
   def add

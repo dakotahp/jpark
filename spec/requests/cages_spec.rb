@@ -26,6 +26,32 @@ RSpec.describe "Cages", type: :request do
     end
   end
 
+  describe "GET /cage/1.json" do
+    it "returns cage" do
+      cage = Cage.create!(name: "Carnivores")
+      dino = Dinosaur.create!(name: "Rex", species: "Tyrannosaurus")
+      cage.add_dinosaur!(dino)
+
+      get '/cages/1.json'
+
+      json_response = JSON.parse(response.body)
+      cage_response = json_response.dig("data").dig("cage")
+      dinosaur_response = json_response.dig("data").dig("dinosaurs").first
+
+      expect(response.status).to eq(200)
+      expect(cage_response.dig("id")).to eq(cage.id)
+      expect(dinosaur_response.dig("id")).to eq(dino.id)
+    end
+
+    it "returns error message when cage not found" do
+      get '/cages/100.json'
+
+      json_response = JSON.parse(response.body)
+      expect(response.status).to eq(404)
+      expect(json_response.dig("errors")).to be_present
+    end
+  end
+
   describe "POST /cages/add.json" do
     it "adds a dinosaur to a cage" do
       cage = Cage.create!(name: "Carnivores")
